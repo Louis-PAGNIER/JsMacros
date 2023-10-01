@@ -41,6 +41,15 @@ public class Pos3D extends Pos2D {
     }
 
     /**
+     * @param vec
+     * @return
+     * @since 1.9.0
+     */
+    public Vec3D add(Vec3D vec) {
+        return vec.add(this);
+    }
+
+    /**
      * @param pos the position to subtract
      * @return the new position.
      * @since 1.8.4
@@ -60,6 +69,15 @@ public class Pos3D extends Pos2D {
         return new Pos3D(this.x - x, this.y - y, this.z - z);
     }
 
+    /**
+     * @param vec
+     * @return
+     * @since 1.9.0
+     */
+    public Vec3D sub(Vec3D vec) {
+        return new Vec3D(x - vec.x1, y - vec.y1, z - vec.z1, x - vec.x2, y - vec.y2, z - vec.z2);
+    }
+
     public Pos3D multiply(Pos3D pos) {
         return new Pos3D(x * pos.x, y * pos.y, z * pos.z);
     }
@@ -74,6 +92,13 @@ public class Pos3D extends Pos2D {
     public Pos3D multiply(double x, double y, double z) {
         return new Pos3D(this.x * x, this.y * y, this.z * z);
     }
+
+    /**
+     * @param vec
+     * @return
+     * @since 1.9.0
+     */
+    public Vec3D multiply(Vec3D vec) { return vec.multiply(this); }
 
     /**
      * @param pos the position to divide by
@@ -93,6 +118,15 @@ public class Pos3D extends Pos2D {
      */
     public Pos3D divide(double x, double y, double z) {
         return new Pos3D(this.x / x, this.y / y, this.z / z);
+    }
+
+    /**
+     * @param vec
+     * @return
+     * @since 1.9.0
+     */
+    public Vec3D divide(Vec3D vec) {
+        return new Vec3D(x / vec.x1, y / vec.y1, z / vec.z1, x / vec.x2, y / vec.y2, z / vec.z2);
     }
 
     /**

@@ -73,6 +73,36 @@ public class Vec3D extends Vec2D {
     }
 
     /**
+     * @param x1
+     * @param y1
+     * @param z1
+     * @param x2
+     * @param y2
+     * @param z2
+     * @return
+     * @since 1.6.3
+     */
+    public Vec3D add(double x1, double y1, double z1, double x2, double y2, double z2) {
+        return new Vec3D(this.x1 + x1, this.y1 + y1, this.z1 + z1, this.x2 + x2, this.y2 + y2, this.z2 + z2);
+    }
+
+    /**
+     * @param pos
+     * @return
+     * @since 1.9.0
+     */
+    public Vec3D add(Pos3D pos) {
+        return new Vec3D(
+                this.x1 + pos.x,
+                this.y1 + pos.y,
+                this.z1 + pos.z,
+                this.x2 + pos.x,
+                this.y2 + pos.y,
+                this.z2 + pos.z
+        );
+    }
+
+    /**
      * @param pos
      * @return
      * @since 1.6.4
@@ -112,6 +142,23 @@ public class Vec3D extends Vec2D {
         return new Vec3D(this.x1, this.y1, this.z1, this.x2 + x, this.y2 + y, this.z2 + z);
     }
 
+
+    /**
+     * @param vec
+     * @return
+     * @since 1.9.0
+     */
+    public Vec3D sub(Vec3D vec) {
+        return new Vec3D(
+                this.x1 - vec.x1,
+                this.y1 - vec.y1,
+                this.z1 - vec.z1,
+                this.x2 - vec.x2,
+                this.y2 - vec.y2,
+                this.z2 - vec.z2
+        );
+    }
+
     /**
      * @param x1
      * @param y1
@@ -120,10 +167,26 @@ public class Vec3D extends Vec2D {
      * @param y2
      * @param z2
      * @return
-     * @since 1.6.3
+     * @since 1.9.0
      */
-    public Vec3D add(double x1, double y1, double z1, double x2, double y2, double z2) {
-        return new Vec3D(this.x1 + x1, this.y1 + y1, this.z1 + z1, this.x2 + x2, this.y2 + y2, this.z2 + z2);
+    public Vec3D sub(double x1, double y1, double z1, double x2, double y2, double z2) {
+        return new Vec3D(this.x1 - x1, this.y1 - y1, this.z1 - z1, this.x2 - x2, this.y2 - y2, this.z2 - z2);
+    }
+
+    /**
+     * @param pos
+     * @return
+     * @since 1.9.0
+     */
+    public Vec3D sub(Pos3D pos) {
+        return new Vec3D(
+                this.x1 - pos.x,
+                this.y1 - pos.y,
+                this.z1 - pos.z,
+                this.x2 - pos.x,
+                this.y2 - pos.y,
+                this.z2 - pos.z
+        );
     }
 
     public Vec3D multiply(Vec3D vec) {
@@ -149,6 +212,22 @@ public class Vec3D extends Vec2D {
      */
     public Vec3D multiply(double x1, double y1, double z1, double x2, double y2, double z2) {
         return new Vec3D(this.x1 * x1, this.y1 * y1, this.z1 * z1, this.x2 * x2, this.y2 * y2, this.z2 * z2);
+    }
+
+    /**
+     * @param pos
+     * @return
+     * @since 1.9.0
+     */
+    public Vec3D multiply(Pos3D pos) {
+        return new Vec3D(
+                this.x1 * pos.x,
+                this.y1 * pos.y,
+                this.z1 * pos.z,
+                this.x2 * pos.x,
+                this.y2 * pos.y,
+                this.z2 * pos.z
+        );
     }
 
     /**
@@ -205,6 +284,68 @@ public class Vec3D extends Vec2D {
     public Vec3D reverse() {
         return new Vec3D(x2, y2, z2, x1, y1, z1);
     }
+
+    /**
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     * @since 1.9.0
+     */
+    public Vec3D stretch(double x, double y, double z) {
+        double d = this.x1;
+        double e = this.y1;
+        double f = this.z1;
+        double g = this.x2;
+        double h = this.y2;
+        double i = this.z2;
+
+        if (x < 0.0D)
+            d += x;
+        else if (x > 0.0D)
+            g += x;
+
+        if (y < 0.0D)
+            e += y;
+        else if (y > 0.0D)
+            h += y;
+
+        if (z < 0.0D)
+            f += z;
+        else if (z > 0.0D)
+            i += z;
+
+        return new Vec3D(d, e, f, g, h, i);
+    }
+
+    /**
+     * @param pos
+     * @return
+     * @since 1.9.0
+     */
+    public Vec3D stretch(Pos3D pos) {
+        return stretch(pos.x, pos.y, pos.z);
+    }
+
+    /**
+     * @param vec
+     * @return
+     * @since 1.9.0
+     */
+    public Vec3D stretch(Vec3D vec) {
+        return stretch(vec.getStart()).stretch(vec.getEnd());
+    }
+
+    /**
+     * @param n
+     * @return
+     * @since 1.9.0
+     */
+    @Override
+    public Vec3D expand(double n) {
+        return new Vec3D(x1 - n, y1 - n, z1 - n, x2 + n, y2 + n, z2 + n);
+    }
+
 
     @Override
     public String toString() {

@@ -37,6 +37,15 @@ public class Pos2D {
     }
 
     /**
+     * @param vec
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D add(Vec2D vec) {
+        return vec.add(this);
+    }
+
+    /**
      * @param pos the position to subtract
      * @return the new position.
      * @since 1.8.4
@@ -55,6 +64,15 @@ public class Pos2D {
         return new Pos2D(this.x - x, this.y - y);
     }
 
+    /**
+     * @param vec
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D sub(Vec2D vec) {
+        return new Vec2D(x - vec.x1, y - vec.y1, x - vec.x2, y - vec.y2);
+    }
+
     public Pos2D multiply(Pos2D pos) {
         return new Pos2D(x * pos.x, y * pos.y);
     }
@@ -68,6 +86,13 @@ public class Pos2D {
     public Pos2D multiply(double x, double y) {
         return new Pos2D(this.x * x, this.y * y);
     }
+
+    /**
+     * @param vec
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D multiply(Vec2D vec) { return vec.multiply(this); }
 
     /**
      * @param pos the position to divide by
@@ -86,6 +111,15 @@ public class Pos2D {
      */
     public Pos2D divide(double x, double y) {
         return new Pos2D(this.x / x, this.y / y);
+    }
+
+    /**
+     * @param vec
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D divide(Vec2D vec) {
+        return new Vec2D(x / vec.x1, y / vec.y1, x / vec.x2, y / vec.y2);
     }
 
     /**

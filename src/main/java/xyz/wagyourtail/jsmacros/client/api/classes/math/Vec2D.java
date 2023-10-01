@@ -88,6 +88,60 @@ public class Vec2D {
         return new Vec2D(this.x1 + x1, this.y1 + y1, this.x2 + x2, this.y2 + y2);
     }
 
+    /**
+     * @param pos
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D add(Pos2D pos) {
+        return new Vec2D(
+                this.x1 + pos.x,
+                this.y1 + pos.y,
+                this.x2 + pos.x,
+                this.y2 + pos.y
+        );
+    }
+
+    /**
+     * @param vec
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D sub(Vec2D vec) {
+        return new Vec2D(
+                this.x1 - vec.x1,
+                this.y1 - vec.y1,
+                this.x2 - vec.x2,
+                this.y2 - vec.y2
+        );
+    }
+
+    /**
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D sub(double x1, double y1, double x2, double y2) {
+        return new Vec2D(this.x1 - x1, this.y1 - y1, this.x2 - x2, this.y2 - y2);
+    }
+
+    /**
+     * @param pos
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D sub(Pos2D pos) {
+        return new Vec2D(
+                this.x1 - pos.x,
+                this.y1 - pos.y,
+                this.x2 - pos.x,
+                this.y2 - pos.y
+        );
+    }
+
     public Vec2D multiply(Vec2D vec) {
         return new Vec2D(x1 * vec.x1, y1 * vec.y1, x2 * vec.x2, y2 * vec.y2);
     }
@@ -102,6 +156,20 @@ public class Vec2D {
      */
     public Vec2D multiply(double x1, double y1, double x2, double y2) {
         return new Vec2D(this.x1 * x1, this.y1 * y1, this.x2 * x2, this.y2 * y2);
+    }
+
+    /**
+     * @param pos
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D multiply(Pos2D pos) {
+        return new Vec2D(
+                this.x1 * pos.x,
+                this.y1 * pos.y,
+                this.x2 * pos.x,
+                this.y2 * pos.y
+        );
     }
 
     /**
@@ -132,6 +200,58 @@ public class Vec2D {
     public Vec2D normalize() {
         double mag = getMagnitude();
         return new Vec2D(x1 / mag, y1 / mag, x2 / mag, y2 / mag);
+    }
+
+    /**
+     * @param x
+     * @param y
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D stretch(double x, double y) {
+        double d = this.x1;
+        double e = this.y1;
+        double f = this.x2;
+        double g = this.y2;
+
+        if (x < 0.0D)
+            d += x;
+        else if (x > 0.0D)
+            f += x;
+
+        if (y < 0.0D)
+            e += y;
+        else if (y > 0.0D)
+            g += y;
+
+        return new Vec2D(d, e, f, g);
+    }
+
+    /**
+     * @param pos
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D stretch(Pos2D pos) {
+        return stretch(pos.x, pos.y);
+    }
+
+    /**
+     * @param vec
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D stretch(Vec2D vec) {
+        return stretch(vec.getStart()).stretch(vec.getEnd());
+    }
+
+    /**
+     * @param n
+     * @return
+     * @since 1.9.0
+     */
+    public Vec2D expand(double n) {
+        return new Vec2D(x1 - n, y1 - n, x2 + n, y2 + n);
     }
 
     public String toString() {
