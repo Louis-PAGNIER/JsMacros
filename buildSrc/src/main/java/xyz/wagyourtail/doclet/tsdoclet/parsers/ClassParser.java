@@ -200,29 +200,24 @@ public class ClassParser extends AbstractParser {
             if (!superMethods.isEmpty()) {
                 Set<Element> merged = new LinkedHashSet<>();
                 Set<Name> superMethodNames = new LinkedHashSet<>();
-                Name next = null;
+
+                Element[] methodsArr = methods.toArray(new Element[0]);
+
                 for (Element m : superMethods) superMethodNames.add(m.getSimpleName());
-                for (Element m : methods) {
-                    if (next != null) {
-                        if (m.getSimpleName().equals(next)) {
-                            merged.add(m);
-                            continue;
-                        }
-                        for (Element sm : superMethods) {
-                            if (sm.getSimpleName().equals(next)) merged.add(sm);
-                        }
-                        superMethodNames.remove(next);
-                        next = null;
-                    }
-                    Name name = m.getSimpleName();
-                    if (superMethodNames.contains(name)) next = name;
+                for (int i = 0; i < methodsArr.length; i++) {
+                    Element m = methodsArr[i];
+                    Name currentName = m.getSimpleName();
+                    Name nextName = null;
+
                     merged.add(m);
-                }
-                if (next != null) {
-                    for (Element sm : superMethods) {
-                        if (sm.getSimpleName().equals(next)) merged.add(sm);
+                    if (i + 1 < methodsArr.length) nextName = methodsArr[i + 1].getSimpleName();
+                    if (nextName != null && !nextName.equals(currentName) && superMethodNames.contains(currentName)) {
+                        for (Element sm : superMethods) {
+                            if (sm.getSimpleName().equals(currentName)) merged.add(sm);
+                        }
                     }
                 }
+
                 methods = merged;
             }
         }

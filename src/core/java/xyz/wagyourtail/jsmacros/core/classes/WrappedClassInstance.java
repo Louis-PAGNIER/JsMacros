@@ -54,7 +54,6 @@ public class WrappedClassInstance<T> {
 
     protected Field findField(Class<?> asClass, String fieldName) throws NoSuchFieldException, IOException {
         Field fd = asClass.getDeclaredField(fieldName);
-
         fd.setAccessible(true);
         return fd;
     }
